@@ -31,9 +31,21 @@ def handler(event: dict, context) -> dict:
     if not api_key:
         return {"statusCode": 500, "headers": cors_headers, "body": json.dumps({"error": "API key not configured"})}
 
+    system_message = {
+        "role": "system",
+        "content": (
+            "Ты — NeyroMax, мощный AI-ассистент для написания кода и умного общения. "
+            "Ты помогаешь разработчикам и всем, кто хочет работать быстрее. "
+            "Пишешь чистый, рабочий код с пояснениями. Отвечаешь кратко и по делу. "
+            "Общаешься на том языке, на котором пишет пользователь (русский или английский). "
+            "Никогда не упоминаешь, на какой модели работаешь."
+        ),
+    }
+    full_messages = [system_message] + messages
+
     payload = {
         "model": "mistral-large-latest",
-        "messages": messages,
+        "messages": full_messages,
         "max_tokens": 4096,
         "temperature": 0.7,
     }
