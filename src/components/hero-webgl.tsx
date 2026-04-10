@@ -2,6 +2,7 @@ import { Canvas, extend, useFrame } from "@react-three/fiber"
 import { useAspect, useTexture } from "@react-three/drei"
 import { useMemo, useRef, useState, useEffect } from "react"
 import * as THREE from "three"
+import { Button } from "@/components/ui/button"
 
 const TEXTUREMAP = { src: "https://i.postimg.cc/XYwvXN8D/img-4.png" }
 const DEPTHMAP = { src: "https://i.postimg.cc/2SHKQh2q/raw-4.webp" }
@@ -72,8 +73,8 @@ const Scene = () => {
         // Flow effect based on progress
         float flow = 1.0 - smoothstep(0.0, 0.02, abs(depth - uProgress));
 
-        // Red scanning overlay
-        vec3 mask = vec3(dot * flow * 10.0, 0.0, 0.0);
+        // Cyan scanning overlay
+        vec3 mask = vec3(0.0, dot * flow * 10.0, dot * flow * 10.0);
 
         // Combine effects
         vec3 final = baseColor.rgb + mask;
@@ -114,8 +115,8 @@ const Scene = () => {
 }
 
 export const Hero3DWebGL = () => {
-  const titleWords = "Synapse AI".split(" ")
-  const subtitle = "Нейроинтерфейсы нового поколения."
+  const titleWords = "NeyroMax".split(" ")
+  const subtitle = "Нейросеть для кода и общения. Думай — она пишет."
   const [visibleWords, setVisibleWords] = useState(0)
   const [subtitleVisible, setSubtitleVisible] = useState(false)
   const [delays, setDelays] = useState<number[]>([])
@@ -145,9 +146,9 @@ export const Hero3DWebGL = () => {
         <div className="absolute top-0 bottom-0 right-0 w-32 bg-gradient-to-l from-black to-transparent" />
       </div>
 
-      <div className="h-screen uppercase items-center w-full absolute z-[60] pointer-events-none px-10 flex justify-center flex-col">
-        <div className="text-3xl md:text-5xl xl:text-6xl 2xl:text-7xl font-extrabold font-orbitron">
-          <div className="flex space-x-2 lg:space-x-6 overflow-hidden text-white">
+      <div className="h-screen uppercase items-center w-full absolute z-[60] px-10 flex justify-center flex-col">
+        <div className="text-3xl md:text-5xl xl:text-6xl 2xl:text-7xl font-extrabold font-orbitron pointer-events-none">
+          <div className="flex space-x-2 lg:space-x-6 overflow-hidden" style={{ color: "#00e5ff", textShadow: "0 0 30px #00e5ff, 0 0 60px rgba(0,229,255,0.5)" }}>
             {titleWords.map((word, index) => (
               <div
                 key={index}
@@ -162,7 +163,7 @@ export const Hero3DWebGL = () => {
             ))}
           </div>
         </div>
-        <div className="text-xs md:text-xl xl:text-2xl 2xl:text-3xl mt-2 overflow-hidden text-white font-bold max-w-4xl mx-auto text-center px-4">
+        <div className="text-xs md:text-xl xl:text-2xl 2xl:text-3xl mt-2 overflow-hidden text-white font-bold max-w-4xl mx-auto text-center px-4 pointer-events-none">
           <div
             className={subtitleVisible ? "fade-in-subtitle" : ""}
             style={{
@@ -173,6 +174,36 @@ export const Hero3DWebGL = () => {
             {subtitle}
           </div>
         </div>
+        {subtitleVisible && (
+          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center fade-in" style={{ animationDelay: "0.3s" }}>
+            <Button
+              size="lg"
+              className="text-lg px-10 py-6 font-orbitron font-bold rounded-xl border-0 uppercase tracking-widest"
+              style={{
+                background: "linear-gradient(135deg, #00b8d9, #00e5ff)",
+                color: "#000d14",
+                boxShadow: "0 0 30px rgba(0,229,255,0.6), 0 0 60px rgba(0,229,255,0.2)",
+              }}
+              onClick={() => window.location.href = "/chat"}
+            >
+              Начать общение
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="text-lg px-10 py-6 font-orbitron font-bold rounded-xl uppercase tracking-widest"
+              style={{
+                borderColor: "#00e5ff",
+                color: "#00e5ff",
+                background: "transparent",
+                boxShadow: "0 0 15px rgba(0,229,255,0.2)",
+              }}
+              onClick={() => document.getElementById("features")?.scrollIntoView({ behavior: "smooth" })}
+            >
+              Возможности
+            </Button>
+          </div>
+        )}
       </div>
 
       <Canvas

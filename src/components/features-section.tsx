@@ -3,51 +3,53 @@ import { Badge } from "@/components/ui/badge"
 
 const features = [
   {
-    title: "Адаптивная нейрообработка",
-    description: "Самооптимизирующиеся алгоритмы, которые обучаются на нейронных паттернах и улучшают интерпретацию сигналов.",
-    icon: "brain",
-    badge: "ИИ",
+    title: "Генерация кода",
+    description: "Пишет код на любом языке: Python, JavaScript, TypeScript, Go, Rust и других. Объясняет каждую строку и предлагает оптимизации.",
+    icon: "💻",
+    badge: "Код",
   },
   {
-    title: "Медицинская защита",
-    description: "Шифрование по стандартам FDA со сквозной защитой конфиденциальных нейронных данных.",
-    icon: "lock",
-    badge: "Сертификат",
+    title: "Умное общение",
+    description: "Диалог на естественном языке — задавайте вопросы, обсуждайте идеи, получайте развёрнутые ответы без лишней воды.",
+    icon: "🧠",
+    badge: "Чат",
   },
   {
-    title: "Интуитивное управление",
-    description: "Естественная трансляция мыслей в действия с откликом менее миллисекунды и точностью 99,7%.",
-    icon: "globe",
-    badge: "Точность",
+    title: "Отладка и ревью",
+    description: "Находит баги, объясняет причины ошибок и предлагает правки. Ревью кода как от опытного senior-разработчика.",
+    icon: "🔍",
+    badge: "Debug",
   },
   {
-    title: "Предиктивная калибровка",
-    description: "ML-модели, которые предугадывают намерения пользователя и оптимизируют нейронные пути.",
-    icon: "zap",
-    badge: "Умный",
+    title: "Молниеносный отклик",
+    description: "Ответы генерируются в реальном времени без задержек. Потоковая передача текста для мгновенного восприятия.",
+    icon: "⚡",
+    badge: "Быстро",
   },
   {
-    title: "Биометрическая интеграция",
-    description: "Бесшовная синхронизация с мониторингом жизненных показателей для контроля здоровья.",
-    icon: "link",
-    badge: "Связь",
+    title: "Контекст разговора",
+    description: "Помнит всю историю диалога и учитывает предыдущие сообщения для точных и связных ответов.",
+    icon: "🔗",
+    badge: "Память",
   },
   {
-    title: "Поддержка XR",
-    description: "Нативная совместимость с AR/VR-средами для терапевтических и рабочих приложений.",
-    icon: "target",
-    badge: "XR Ready",
+    title: "Многоязычность",
+    description: "Общайтесь на русском, английском и других языках. NeyroMax понимает и отвечает на том языке, который удобен вам.",
+    icon: "🌐",
+    badge: "Языки",
   },
 ]
 
 export function FeaturesSection() {
   return (
-    <section className="py-24 px-6 bg-background">
+    <section className="py-24 px-6 bg-background" id="features">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-foreground mb-4 font-sans">Возможности нового поколения</h2>
+          <h2 className="text-4xl font-bold text-foreground mb-4 font-orbitron" style={{ color: "#00e5ff", textShadow: "0 0 20px rgba(0,229,255,0.4)" }}>
+            Возможности NeyroMax
+          </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Почувствуйте будущее с технологиями, которые переопределяют возможное
+            Мощный AI-помощник для разработчиков и всех, кто хочет думать быстрее
           </p>
         </div>
 
@@ -55,20 +57,26 @@ export function FeaturesSection() {
           {features.map((feature, index) => (
             <Card
               key={index}
-              className="glow-border hover:shadow-lg transition-all duration-300 slide-up"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              className="slide-up hover:shadow-lg transition-all duration-300"
+              style={{
+                animationDelay: `${index * 0.1}s`,
+                background: "rgba(0,229,255,0.03)",
+                border: "1px solid rgba(0,229,255,0.15)",
+                boxShadow: "0 0 20px rgba(0,229,255,0.05)",
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLDivElement).style.boxShadow = "0 0 30px rgba(0,229,255,0.2), 0 0 60px rgba(0,229,255,0.05)"
+                ;(e.currentTarget as HTMLDivElement).style.borderColor = "rgba(0,229,255,0.4)"
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLDivElement).style.boxShadow = "0 0 20px rgba(0,229,255,0.05)"
+                ;(e.currentTarget as HTMLDivElement).style.borderColor = "rgba(0,229,255,0.15)"
+              }}
             >
               <CardHeader>
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-3xl">
-                    {feature.icon === "brain" && "&#129504;"}
-                    {feature.icon === "lock" && "&#128274;"}
-                    {feature.icon === "globe" && "&#127760;"}
-                    {feature.icon === "zap" && "&#9889;"}
-                    {feature.icon === "link" && "&#128279;"}
-                    {feature.icon === "target" && "&#127919;"}
-                  </span>
-                  <Badge variant="secondary" className="bg-accent text-accent-foreground">
+                  <span className="text-3xl">{feature.icon}</span>
+                  <Badge variant="secondary" style={{ background: "rgba(0,229,255,0.15)", color: "#00e5ff", border: "1px solid rgba(0,229,255,0.3)" }}>
                     {feature.badge}
                   </Badge>
                 </div>
