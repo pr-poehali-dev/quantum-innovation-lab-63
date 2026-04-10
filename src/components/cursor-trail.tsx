@@ -36,8 +36,8 @@ export function CursorTrail() {
       trailRefs.current.forEach((el, i) => {
         if (!el) return
         const ratio = 1 - i / MAX_TRAIL
-        const size = Math.max(2, 10 * ratio)
-        const opacity = ratio * 0.8
+        const size = Math.max(3, 22 * ratio * ratio)
+        const opacity = Math.pow(ratio, 1.5) * 0.9
         el.style.left = `${positions.current[i].x}px`
         el.style.top = `${positions.current[i].y}px`
         el.style.width = `${size}px`
