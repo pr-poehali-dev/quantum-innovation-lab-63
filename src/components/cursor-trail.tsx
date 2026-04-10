@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react"
 
-const MAX_TRAIL = 18
+const MAX_TRAIL = 28
 
 export function CursorTrail() {
   const orbRef = useRef<HTMLDivElement>(null)
@@ -23,8 +23,8 @@ export function CursorTrail() {
         const prev = positions.current[i - 1]
         const curr = positions.current[i]
         positions.current[i] = {
-          x: curr.x + (prev.x - curr.x) * 0.35,
-          y: curr.y + (prev.y - curr.y) * 0.35,
+          x: curr.x + (prev.x - curr.x) * 0.1,
+          y: curr.y + (prev.y - curr.y) * 0.1,
         }
       }
 
